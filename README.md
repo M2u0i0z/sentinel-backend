@@ -18,6 +18,8 @@ flowchart LR
 
 The backend is an event reader, not a transaction writer. The example configuration points to the current Testnet deployment. Set `CONTRACT_ID` to a deployed contract on the selected network; without it, `/events` returns HTTP 503 rather than fabricated data.
 
+Request logs are JSON records containing the method, route template, status, latency, and optional request ID. Raw paths, query strings, headers, request bodies, and upstream exception details are not logged; unmatched routes use a fixed label.
+
 ### Current Testnet contract
 
 The configured contract is [`CCZAAZ3FJ7LKZA7E7A6EKQTU2HCNVI3YUVIHKWHSULGZSWAJFS2D2XVX`](https://stellar.expert/explorer/testnet/contract/CCZAAZ3FJ7LKZA7E7A6EKQTU2HCNVI3YUVIHKWHSULGZSWAJFS2D2XVX), initialized with threshold `70`. `GET /events` is connected to its Soroban RPC event stream and currently returns an empty event list; no monitoring agent has been authorized yet. See the contract repository's [Testnet deployment runbook](https://github.com/Stellar-Sentinel/sentinel-contracts#testnet-deployment) for transaction links and redeployment commands.
