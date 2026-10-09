@@ -45,6 +45,8 @@ uvicorn app.main:app --reload
 
 Open [http://localhost:8000/docs](http://localhost:8000/docs). Set the frontend's `NEXT_PUBLIC_API_BASE_URL` to this API origin and allow the frontend origin in `CORS_ORIGINS`.
 
+For private deployments, set a random `API_KEY` of at least 32 characters and send it as `Authorization: Bearer <API_KEY>` to business API routes. `/health`, API documentation, and CORS preflight remain accessible. Leave `API_KEY` empty for local development.
+
 ## Commands
 
 | Command | Purpose |
@@ -70,8 +72,9 @@ Copy `.env.example` to `.env`; environment variables override file values. Use m
 | `ACTIVITY_WINDOW_DAYS` | `7` | Recent activity screening window. |
 | `EVENTS_LOOKBACK_LEDGERS` | `50000` | First-page event search window, clamped to RPC retention. |
 | `CORS_ORIGINS` | `http://localhost:3000` | Comma-separated browser origins allowed to call the API. |
+| `API_KEY` | empty | Optional bearer key for business API routes; use at least 32 random characters when enabled. |
 
-Do not commit `.env`, account secrets, signing keys, or tokens. The current service requires no secrets.
+Do not commit `.env`, account secrets, signing keys, or tokens. `API_KEY` is optional for local development and should be configured for private deployments.
 
 ## Data and scoring limits
 

@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     activity_window_days: int = 7
     events_lookback_ledgers: int = 50_000
     cors_origins: str = "http://localhost:3000"
+    api_key: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 

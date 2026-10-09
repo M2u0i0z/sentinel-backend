@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
+from app.middleware.api_key import ApiKeyMiddleware
 from app.stellar import network_status
 from app.routers import health, events, risk
 
@@ -19,6 +20,8 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization"],
 )
+if settings.api_key:
+    app.add_middleware(ApiKeyMiddleware, api_key=settings.api_key)
 
 app.include_router(health.router)
 app.include_router(events.router, prefix="/events", tags=["events"])
